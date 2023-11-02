@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 const MainView: React.FunctionComponent = () => {
   const [chat, setChat] = useState<Array<ChatLogType>>([]);
+  const [message, setMessage] = useState<string>("");
 
   // adding chat data, in async manner.
   useEffect(() => {
@@ -56,8 +57,28 @@ const MainView: React.FunctionComponent = () => {
         <div className="mt-4">
           <input
             type={"text"}
-            className="shadow-md rounded-lg border bg-neutral-50 w-full px-4 py-3"
+            className="shadow-md rounded-lg border bg-neutral-50 w-full px-4 py-3 focus:outline-blue-400"
             placeholder="Say Hi 👋🏼 to chat"
+            onChange={(e) => setMessage(e.target.value as string)}
+            value={message}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                setChat([
+                  ...chat,
+                  {
+                    messageType: "message",
+                    chatMessage: message,
+                    chatSender: {
+                      username: "You",
+                      firstName: "Yash",
+                      lastName: "Sehgal"
+                    },
+                    chatDelay: 10
+                  }
+                ]);
+                setMessage("");
+              }
+            }}
           />
         </div>
       </div>
@@ -69,7 +90,7 @@ const ChatMessage = ({ message, user, type }: { message: string; user: any, type
   return (
     <div className="chat-message-log flex flex-row items-center gap-1 justify-start">
       <p>{type === "new-member" && "🎉"}</p>
-      <p className="chat-message-log__sender-name font-medium">
+      <p className={`chat-message-log__sender-name font-medium ${user.username === "You" && "text-red-500"}`}>
         {user.username}
       </p>
       <p className="chat-message-log__message-content text-neutral-500">{message}</p>
