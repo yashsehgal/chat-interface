@@ -37,6 +37,7 @@ const MESSAGE_TYPES: Array<Pick<ChatLogType, 'messageType'>> = [
   { messageType: "new-member" }
 ];
 const MESSAGE_USERS = [
+  { firstName: "Yash", lastName: "Sehgal", username: "yashsehgal" },
   { firstName: "Peter", lastName: "Parker", username: "spiderman" },
   { firstName: "Tony", lastName: "Stark", username: "ironman" },
   { firstName: "Bruce", lastName: "Banner", username: "hulk" },
@@ -47,7 +48,7 @@ const MESSAGE_USERS = [
 
 const populateChatLog = () => {
   const CHAT_LOG_SIZE = 40;
-  const CHAT_LOG_DELAYS = [1000, 2000, 600, 120, 1200, 1560, 3000, 100, 120, 1240, 246];
+  const CHAT_LOG_DELAYS = [3000, 2000, 600, 1290, 1200, 1560, 3000, 100, 120, 1240, 1246, 888, 567, 5555, 3210];
 
   // for storing chat logs
   let chatLogs: Array<ChatLogType> = [];
