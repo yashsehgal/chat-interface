@@ -1,7 +1,8 @@
 "use client";
 import { ChatLogType } from "@/api";
-import { delay, populateChatLog } from "@/api/chat-log";
+import { delay, populateChatLog } from "@/api";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 const MainView: React.FunctionComponent = () => {
   const [chat, setChat] = useState<Array<ChatLogType>>([]);
@@ -54,7 +55,7 @@ const MainView: React.FunctionComponent = () => {
             )
           })}
         </div>
-        <div className="mt-4">
+        <div className="mt-4 flex items-center gap-4 max-md:grid">
           <input
             type={"text"}
             className="shadow-md rounded-lg border bg-neutral-50 w-full px-4 py-3 focus:outline-blue-400"
@@ -80,21 +81,58 @@ const MainView: React.FunctionComponent = () => {
               }
             }}
           />
+          <div className="emoji-reactions-wrapper shadow-md rounded-lg border bg-neutral-50 w-[260px] max-md:w-[240px] max-md:mt-6 max-md:mx-auto px-4 py-3 flex flex-row items-center justify-between">
+            {["❤️", "🔥", "😍", "😂", "😭"].map((icon, index) => {
+              return (
+                <ReactionButton icon={icon} key={index} />
+              )
+            })}
+          </div>
         </div>
       </div>
     </div>
   )
 }
 
+const ReactionButton = ({ icon }: { icon: string }) => {
+  const [isReacted, setIsReacted] = useState<boolean>(false);
+  return (
+    <>
+      <motion.button className="scale-125 hover:scale-150 transition-all relative"
+        onClick={() => {
+          setIsReacted(true);
+          setTimeout(() => {
+            setIsReacted(false);
+          }, 2000);
+        }}
+      >
+        {icon}
+        {/* {isReacted && <span className="reaction-display">{icon}</span>} */}
+      </motion.button>
+    </>
+  )
+}
+
 const ChatMessage = ({ message, user, type }: { message: string; user: any, type: "message" | "new-member" }) => {
   return (
-    <div className="chat-message-log flex flex-row items-center gap-1 justify-start">
+    <motion.div className="chat-message-log flex flex-row items-center gap-1 justify-start"
+      initial={{
+        opacity: 0.3,
+        y: 6,
+        x: 4
+      }}
+      animate={{
+        opacity: 1,
+        y: 0,
+        x: 0
+      }}
+    >
       <p>{type === "new-member" && "🎉"}</p>
       <p className={`chat-message-log__sender-name font-medium ${user.username === "You" && "text-red-500"}`}>
         {user.username}
       </p>
       <p className="chat-message-log__message-content text-neutral-500">{message}</p>
-    </div>
+    </motion.div>
   )
 }
 

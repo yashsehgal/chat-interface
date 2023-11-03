@@ -10,3 +10,36 @@ html, body {
   @apply box-border mx-auto;
   @apply w-[1000px] max-2xl:w-[900px] max-xl:w-[720px] max-lg:w-[640px] max-md:w-[560px] max-sm:w-[340px];
 }
+
+.reaction-display {
+  @apply absolute;
+  animation: ReactedIconDisplayAnimation 2s linear;
+}
+
+@keyframes ReactedIconDisplayAnimation {
+  0% {
+    opacity: 0;
+    top: -20px;
+    left: -12px;
+  }
+  25% {
+    opacity: 0.2;
+    top: -20px;
+    left: -12px;
+  }
+  50% {
+    opacity: 0.6;
+    top: -30px;
+    left: -20px;
+  }
+  75% {
+    opacity: 0.4;
+    top: -36px;
+    left: -14px;
+  }
+  100% {
+    opacity: 0;
+    top: -40px;
+    left: 2px;
+  }
+}

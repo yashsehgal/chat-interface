@@ -47,8 +47,8 @@ const MESSAGE_USERS = [
 ];
 
 const populateChatLog = () => {
-  const CHAT_LOG_SIZE = 40;
-  const CHAT_LOG_DELAYS = [3000, 2000, 600, 1290, 1200, 1560, 3000, 100, 120, 1240, 1246, 888, 567, 5555, 3210];
+  const CHAT_LOG_SIZE = 1200;
+  const CHAT_LOG_DELAYS = [300, 700, 600, 1290, 1200, 1560, 3000, 100, 120, 1240, 1246, 888, 567, 555, 321];
 
   // for storing chat logs
   let chatLogs: Array<ChatLogType> = [];
@@ -80,7 +80,9 @@ const populateChatLog = () => {
   return chatLogs;
 }
 
-// custom delayer function
+/**
+ * method to create a promise object with custom delay
+ */
 const delay = (delayMS: number) => new Promise(resolve => setTimeout(resolve, delayMS));
 
 
